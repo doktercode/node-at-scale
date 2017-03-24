@@ -1,0 +1,10 @@
+Global Variables in Node.js:
+===========================
+
+__filename      -       Returns the absolute path of the currently executing file
+__dirname       -       Returns the absolute path of the directory containing the currently executing file.
+process         -       An object which represents the current running process
+process.env     -       An object representing the user environment for the current process.
+process.stdin, process.stout,process.stderr      -           Streams which are corresponded to the standard input, standard output
+and standard error output for the current process.
+process.argv    -       An array containing the command line arguments
