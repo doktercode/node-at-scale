@@ -54,6 +54,46 @@ fs.open(path,'r',function(err,fd){
 });
 
 
+/* fs in write mode */
+
+var fs = require("fs");
+//Fetching an entire file at once
+fs.readFile("./text.txt","utf8",function(err, data) {
+ if(err) {
+ console.write(err);
+ }
+ else{
+ console.log(data);
+ }
+});
+//open file and write to it byte by byte
+fs.open("fs-write.txt", "w", function (err, fd) {
+    var buffer = new Buffer('This is a File System write operation');
+    var totalBytes = buffer.length;
+    var bytesWrite = 0;
+    //Each call to ensure that chunk size is not too small; not too large
+    var chunkSize = Math.min(15, totalBytes);
+    while (bytesWrite < totalBytes) {
+        //for writing last chunk
+        if ((bytesWrite + chunkSize) > totalBytes) {
+            chunkSize = Math.min(512, (totalBytes - bytesWrite));
+        }
+        //writing the file byte by byte
+        fs.write(fd, buffer, bytesWrite, chunkSize, bytesWrite, error);
+        bytesWrite += chunkSize;
+    }
+    function error(err) {
+        if (err) {
+            console.log("File write aborted!!");
+            console.log(err.stack);
+            fs.close(fd);
+        }
+    }
+    fs.close(fd);
+    console.log("File write completed!!");
+    console.log("Total bytes written: " + totalBytes);
+});
+
 /* Write file at once */
 
 fs.writeFile('fs-write.txt','fs write operation','utf8',function(err,data){
