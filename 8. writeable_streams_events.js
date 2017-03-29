@@ -39,7 +39,7 @@ ws.on('finish',function(){
     console.log('Finished!');
 });
 
-ws.on('error',function(){
+ws.on('error',function(err){
     console.log(err.stack);
 });
 
