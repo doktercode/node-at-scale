@@ -13,7 +13,7 @@
  *  
  *      drain - when a Writeable Stream's internal buffer has been emptied.
  *      pipe - Piping data from readable to Writeable Stream
- *      unpipe - unpipe data from readable byu removing this Writeable stream.
+ *      unpipe - unpipe data from readable by removing this Writeable stream.
  *      finish - called after stream.end() and all data is flushed into the underlying system.
  *      error - This is event is emitted when there is any error while receiving or writing data.
  */
