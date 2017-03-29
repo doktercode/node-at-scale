@@ -69,27 +69,5 @@ stream.on('error',function(err){
     console.log(err.stack);
 });
 
-/**
- * Readable stream in flowing mode
- */
-
-var fs = require('fs');
-var stream = fs.createReadStream('./input.txt');
-
-stream.on('data',function(){
-    console.log(chunk);
-    stream.pause();
-    setTimeout(function(){
-        stream.resume();
-    },1000);
-});
-
-stream.on('close',function(){
-    console.log('closed');
-});
-
-stream.on('error',function(){
-    console.log(err.stack);
-});
 
 
