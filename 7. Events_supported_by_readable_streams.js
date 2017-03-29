@@ -29,11 +29,11 @@ stream.on('readable',function(){
 }); 
 
 stream.on('end',function(){
-    console.log('finished');
+    console.log('finished'); //no more data to read
 });
 
 stream.on('close',function(){
-    console.log('closed');
+    console.log('closed'); //file has been closed
 }); 
 
 stream.on('error',function(err){
