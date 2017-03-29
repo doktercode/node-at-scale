@@ -52,3 +52,14 @@ fs.open(path,'r',function(err,fd){
          console.log(buffer.toString());
     });
 });
+
+
+/* Write file at once */
+
+fs.writeFile('fs-write.txt','fs write operation','utf8',function(err,data){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('File has been written');
+    }
+});
