@@ -54,7 +54,6 @@ fs.open(path,'r',function(err,fd){
     });
 });
 
-
 /* fs in write mode */
 
 var fs = require("fs");
@@ -105,5 +104,41 @@ fs.writeFile('fs-write.txt','fs write operation','utf8',function(err,data){
     }
 });
 
+
+/* fs in read mode */
 var fs = require('fs');
 var path = './input.txt';
+
+fs.open(path,'r',function(err,fd){
+    fs.stat(fd,function(err,stat){
+        var totalBytes = stat.size;
+        var buffer = new Buffer(totalBytes);
+        var bytesRead = 0;
+
+        //small chunkSize 
+        var chunkSize = Math.min(512,totalBytes);
+        while(bytesRead < totalBytes){
+            //read last chunk
+            if((bytesRead + chunkSize) > totalBytes){
+                chunkSize = totalBytes - bytesRead;
+            }
+            fs.read(fd,buffer,bytesRead,chunkSize,bytesRead,error);
+            bytesRead+= totalBytes;
+        }
+        function error(err){
+            if(err){
+                console.log('File reading aborted');
+                console.log(err);
+                fs.close(fd,function(){
+                    console.log('File closed!');
+                });
+            }
+        }
+        fs.close(fd,function(){
+            console.log('File closed');
+        });
+        console.log('File reading successful');
+        console.log('Total bytes read',totalBytes);
+        console.log(buffer.toString());
+    });
+});
