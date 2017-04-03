@@ -142,3 +142,43 @@ fs.open(path,'r',function(err,fd){
         console.log(buffer.toString());
     });
 });
+
+/* fs in write mode */
+
+var fs = require('fs');
+fs.readFile('./fs.txt',function(err,data){
+    if(err){console.log(err);}
+    else{console.log(data);}
+});
+//open file and write to it byte by byte
+fs.open('fs-write.txt','w',function(err,fd){
+    var buffer = new Buffer('This is a File System write operation');
+    var totalBytes = buffer.length;
+    var bytesWrite = 0;
+
+
+    //small chunkSize
+    var chunkSize = Math.min(15,totalBytes);
+    while(bytesWrite < totalBytes){
+        if((bytesWrite + chunkSize) > totalBytes){
+            chunkSize = Math.min(512,(totalBytes - bytesWrite));
+        }
+        //write file byte by byte
+        fs.write(fd,buffer,bytesWrite,chunkSize,bytesWrite,error);
+        bytesWrite+=chunkSize;
+    }
+    function error(err){
+        if(err){
+            console.log('File writing aborted');
+            console.log(err);
+            fs.close(fd,function(){
+                console.log('File Closed!');
+            });
+        }
+    }
+    fs.close(fd,function(){
+        console.log('File closed!');
+    });
+    console.log('File writing successful');
+    console.log('Total bytes written',totalBytes);
+});
