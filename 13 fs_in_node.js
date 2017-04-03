@@ -12,6 +12,7 @@
  */
 
 /* Functions for performing I/O operations on a file */
+/* fs in read mode */
 
 var fs = require('fs');
 var path = "./fs.txt";
@@ -103,3 +104,6 @@ fs.writeFile('fs-write.txt','fs write operation','utf8',function(err,data){
         console.log('File has been written');
     }
 });
+
+var fs = require('fs');
+var path = './input.txt';
