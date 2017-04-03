@@ -39,6 +39,3 @@ console.log(buffer.toString('binary')); //Hello World!
 console.log(buffer.toString('hex')); //48656c6c6f20576f726c6421
 console.log(buffer.toString('base64')); //SGVsbG8gV29ybGQh
 
-
-
-
